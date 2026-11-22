@@ -1,3 +1,38 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: invest-view-backend
+
+
+ # MySQL Connection Pool (HikariCP)
+  datasource:
+    url: jdbc:mysql://localhost:3306/invest_view_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kolkata
+    username: root
+    password: "vijay826" 
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 30000
+      connection-timeout: 20000
+
+
+ # Spring Data JPA / Hibernate Settings
+  jpa:
+    hibernate:
+      ddl-auto: update # Development mode me entities se table auto-sync karega
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+
+
+# Spring Boot Actuator Health Endpoint
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
