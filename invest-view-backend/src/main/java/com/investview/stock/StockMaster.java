@@ -11,7 +11,7 @@ import java.time.Instant;
  * JPA Entity representing the NSE/BSE stock master list in MySQL.
  */
 @Entity
-@Table(name = "stock_master")
+@Table(name = "stocks_master")
 
 public class StockMaster {
     @Id
