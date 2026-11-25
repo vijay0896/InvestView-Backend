@@ -1,16 +1,18 @@
 server:
-  port: 8080
+  port: ${SERVER_PORT:8080}
 
 spring:
   application:
     name: invest-view-backend
 
+  config:
+    import: optional:file:.env[.properties]
 
- # MySQL Connection Pool (HikariCP)
+  # MySQL Connection Pool (HikariCP)
   datasource:
-    url: jdbc:mysql://localhost:3306/invest_view_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kolkata
-    username: root
-    password: "vijay826" 
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       maximum-pool-size: 10
@@ -18,17 +20,14 @@ spring:
       idle-timeout: 30000
       connection-timeout: 20000
 
-
- # Spring Data JPA / Hibernate Settings
+  # Spring Data JPA / Hibernate Settings
   jpa:
     hibernate:
-      ddl-auto: update # Development mode me entities se table auto-sync karega
-    show-sql: true
+      ddl-auto: ${JPA_DDL_AUTO:update} # Development mode me entities se table auto-sync karega
+    show-sql: ${JPA_SHOW_SQL:true}
     properties:
       hibernate:
         format_sql: true
-
-
 
 # Spring Boot Actuator Health Endpoint
 management:
@@ -37,10 +36,9 @@ management:
       exposure:
         include: health,info
 
-
 # Application Custom Properties
 app:
   jwt:
     # Minimum 32 characters required for HS256 cryptographic security
-    secret: "InvestViewSuperSecretKeyForJwtSigning2026PortfolioCandle!"
-    expiration-ms: 86400000 # 24 hours (in milliseconds)
+    secret: ${JWT_SECRET}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000} # 24 hours (in milliseconds)
