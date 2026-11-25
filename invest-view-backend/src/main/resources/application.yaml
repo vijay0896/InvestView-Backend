@@ -36,3 +36,11 @@ management:
     web:
       exposure:
         include: health,info
+
+
+# Application Custom Properties
+app:
+  jwt:
+    # Minimum 32 characters required for HS256 cryptographic security
+    secret: "InvestViewSuperSecretKeyForJwtSigning2026PortfolioCandle!"
+    expiration-ms: 86400000 # 24 hours (in milliseconds)
